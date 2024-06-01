@@ -48,7 +48,7 @@ import { setGeneralAccount,login} from "../redux/accountSlice";
 
     return(
         <ScrollView scrollEnabled={false} bg={colors.lightsurface} flex={1}>
-                <Center mt={120} >
+                <Center mt={132} >
                     <Image source={require("../img/logo.png")} alt="logo" w={150} h={100} resizeMode="contain"/>
                     <Text py={12} fontSize={40} color="#194200" fontFamily="jf">登入</Text>
                 </Center>
