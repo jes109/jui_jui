@@ -105,7 +105,7 @@ export default SettingDetail = () =>{
                         <View>
                             <TouchableOpacity onPress={handleClose}>
                                 <Box style={styles.logout} bg={colors.primary800}>
-                                    <Text style={styles.logoutword}>Log Out</Text>
+                                    <Text style={styles.logoutword}>登出</Text>
                                 </Box>
                             </TouchableOpacity>
                         </View>
