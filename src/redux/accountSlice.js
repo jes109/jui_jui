@@ -6,7 +6,10 @@ const initialState={
         email:"",
     },
     login:{
-        hasLogin:false
+        hasLogin:false,
+    },
+    sign:{
+        hasAccount:false
     }
 }
 
@@ -22,11 +25,18 @@ const accountSlice=createSlice({
         },
         logout:(state)=>{
             state.login.hasLogin=false;
+        },
+        gotoSignin:(state)=>{
+            state.sign.hasAccount=!state.sign.hasAccount;
+        },
+        gotoSignup:(state)=>{
+            state.sign.hasAccount=false;
         }
     }
 })
 
 export const selectGeneral =(state)=>state.account.general;
 export const selectLogin = (state)=>state.account.login.hasLogin;
-export const {setGeneralAccount,login,logout}=accountSlice.actions;
+export const selectSign = (state)=>state.account.sign.hasAccount;
+export const {setGeneralAccount,login,logout,gotoSignin,gotoSignup}=accountSlice.actions;
 export default accountSlice.reducer;
