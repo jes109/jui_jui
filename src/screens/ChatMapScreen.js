@@ -1,14 +1,17 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { Box, Image, Text } from "@gluestack-ui/themed";
-import { useNavigation } from "@react-navigation/native";
+import { Box, Image, ScrollView, Text ,Center} from "@gluestack-ui/themed";
+import { useNavigation, useTheme } from "@react-navigation/native";
 
-const ChatMapScreen = ({navigation}) => {
-    
+import Map from "../components/Map"
+
+const ChatMapScreen = () => {
+    const {colors}=useTheme();
+
     return(
         <ScrollView bg={colors.card} flex={1}>
             <Center>
-                <ChatMap/>
+                <Map/>
             </Center>
         </ScrollView>
     )

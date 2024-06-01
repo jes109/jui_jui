@@ -46,9 +46,6 @@ export default ChatRoomStack = ({navigation}) => {
                 )
             }}
             />
-            <Stack.Screen name="ChatMap" component={ChatMapScreen} 
-            
-            />
         </Stack.Navigator>
     )
 }
