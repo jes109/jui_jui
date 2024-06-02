@@ -33,7 +33,7 @@ const firebaseConfig = {
     const user=userCredential?.user;
     const docRef=doc(db,"users",user.uid);
     const docSnap=await getDoc(docRef);
-    userData=docSnap?.data();
+    const userData=docSnap?.data();
     return{uid:user?.uid,accessToken:user?.accessToken,email,...userData}
   }
 
@@ -42,7 +42,7 @@ const firebaseConfig = {
     const user = userCredential?.user;
     const docRef = doc(db, "users", user.uid);
     await setDoc(docRef,{
-      name,email,passwords
+      name,email,password
     });
     return {  uid: user?.uid, accessToken: user?.accessToken, name, email};
   }
