@@ -4,13 +4,10 @@ const initialState={
     general:{
         name:"",
         email:"",
+        password:"",
     },
-    login:{
-        hasLogin:false,
-    },
-    sign:{
-        hasAccount:false
-    }
+    login:{hasLogin:false},
+    sign:{hasAccount:false}
 }
 
 const accountSlice=createSlice({
@@ -18,13 +15,19 @@ const accountSlice=createSlice({
     initialState,
     reducers:{
         setGeneralAccount:(state,action)=>{
-            state.general=action.payload
+            state.general={...state.general,...action.payload}
         },
-        login:(state)=>{
+        login:(state,action)=>{
             state.login.hasLogin=true;
+            state.general = { ...state.general, ...action.payload};
         },
         logout:(state)=>{
             state.login.hasLogin=false;
+            state.general = {
+                name: "",
+                email: "",
+                password:""
+             }
         },
         gotoSignin:(state)=>{
             state.sign.hasAccount=!state.sign.hasAccount;
