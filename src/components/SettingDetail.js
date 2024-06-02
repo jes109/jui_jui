@@ -74,9 +74,9 @@ export default SettingDetail = () =>{
                     <View style={styles.btnup}>
                         <Box style={styles.btnleft} bg={colors.primary200}>
                             <Pressable>
-                            <MaterialCommunityIcons name="bookmark-outline" size={40} color={colors.primary800}/>
+                            <MaterialCommunityIcons name="cog" size={40} color={colors.primary800}/>
                             </Pressable>
-                            <Text style={styles.word}>我的收藏</Text>
+                            <Text style={styles.word}>設定</Text>
                         </Box>
                         <Box style={styles.btnright} bg={colors.primary200}>
                             <Pressable>
@@ -100,11 +100,27 @@ export default SettingDetail = () =>{
                         </Box>
                     </View>
                 </View>
+
+                <Center>
+                    <View>
+                        <TouchableOpacity>
+                            <Box style={styles.sunbtn} bg={colors.primary800}>
+                                <Center>
+                                    <MaterialCommunityIcons name="sun-wireless" size={80} color={colors.primary200}/>
+                                </Center>
+                            </Box>
+                        </TouchableOpacity>
+                    </View>
+                </Center>
+
+                <Center>
+                    <Text style={styles.switch}>(按此切換狀態)</Text>
+                </Center>
                 <Box>
                     <Center>
                         <View>
                             <TouchableOpacity onPress={handleClose}>
-                                <Box style={styles.logout} bg={colors.primary800}>
+                                <Box style={styles.logout} bg={colors.primary200}>
                                     <Text style={styles.logoutword}>登出</Text>
                                 </Box>
                             </TouchableOpacity>
@@ -140,6 +156,23 @@ export default SettingDetail = () =>{
 
 const styles=StyleSheet.create(
     {
+        sunbtn: {
+            marginTop: 30,
+            justifyContent: "center",
+            //backgroundColor: "orange",
+            borderRadius: 100,
+            height: 160,
+            width: 160,
+            paddingVertical: 15
+        },
+        sun: {
+            justifyContent: "center",
+            marginTop: 40
+        },
+        switch: {
+            marginTop: 20,
+            color: "green"
+        },
         item: {
             alignSelf: "center"
         },
@@ -168,12 +201,13 @@ const styles=StyleSheet.create(
             alignSelf:"center"
         },
         logout: {
-            marginTop: 60,
+            marginTop: 50,
             justifyContent: "center",
             //backgroundColor: "orange",
             borderRadius: 20,
             width: 180,
-            paddingVertical: 15
+            paddingVertical: 15,
+            marginBottom: 20
         },
         logoutword: {
             fontSize: 20,
@@ -182,10 +216,10 @@ const styles=StyleSheet.create(
             //justifyContent: "center",
             //alignItems: "center",
             textAlign: "center",
-            color: 'white'
+            color: 'red'
         },
         word: {
-            marginLeft: 8,
+            marginLeft: 25,
             marginRight: 8,
             fontSize: 16
         },
