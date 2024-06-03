@@ -13,6 +13,7 @@ import ChatScreen from "../screens/ChatScreen";
 import ChatDetailScreen from "../screens/ChatDetailScreen";
 import ChatRoomScreen from "../screens/ChatRoomScreen";
 import ChatMapScreen from "../screens/ChatMapScreen"
+import { useFonts } from "expo-font";
 
 const Stack = createStackNavigator();
 
@@ -20,13 +21,17 @@ export default ChatStack = ({navigation}) => {
     //const {navigation} = useNavigation();
     const {colors}=useTheme();
 
+    const [fontsLoaded]=useFonts({"jf":require("../../assets/fonts/jf-openhuninn-2.0.ttf")}); 
+    if(!fontsLoaded){return <Text>Font is Loading...</Text>;}    
+
     return(
         <Stack.Navigator
         screenOptions={{
             headerStyle:{ backgroundColor: "#F6F7E3"},
             headerTitleStyle:{
                 color: "#194200",
-                fontSize: 20
+                fontSize: 20,
+                fontFamily:"jf"
             }
         }}
         >

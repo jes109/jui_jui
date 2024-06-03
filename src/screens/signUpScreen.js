@@ -1,4 +1,4 @@
-import React,{ useState,useEffect } from "react";
+import React,{ useState } from "react";
 import {Image,HStack,Box,AlertCircleIcon,VStack,Text, FormControl, Input, InputField, ScrollView, FormControlError, FormControlErrorText, FormControlErrorIcon, Center, InputSlot } from "@gluestack-ui/themed"
 import { TouchableOpacity } from "react-native";
 import { useSelector,useDispatch} from "react-redux"
@@ -41,12 +41,8 @@ import {useSignup} from "../tanstack-query"
     const [email,setEmail]=useState("");
     const [password,setPassword]=useState("");
 
-    const [fontsLoaded]=useFonts({
-        "jf":require("../../assets/fonts/jf-openhuninn-2.0.ttf")
-    }); 
-    if(!fontsLoaded){
-        return <Text>Font is Loading...</Text>;
-    }
+    const [fontsLoaded]=useFonts({"jf":require("../../assets/fonts/jf-openhuninn-2.0.ttf")}); 
+    if(!fontsLoaded){return <Text>Font is Loading...</Text>;}
 
     return(
         <ScrollView bg={colors.lightsurface} flex={1}>
@@ -61,6 +57,7 @@ import {useSignup} from "../tanstack-query"
                                 <AntDesign name="user" size={24} color={colors.primary800}/>
                             </InputSlot>
                             <InputField 
+                            fontSize="$lg"
                             color={colors.primary800}
                             placeholderTextColor={colors.loginlight}
                             placeholder="名字"
@@ -76,6 +73,7 @@ import {useSignup} from "../tanstack-query"
                                 <AntDesign name="mail" size={24} color={colors.primary800}/>
                             </InputSlot>
                             <InputField 
+                            fontSize="$lg"
                             color={colors.primary800}
                             placeholderTextColor={colors.loginlight}
                             placeholder="電子郵件"
@@ -92,6 +90,7 @@ import {useSignup} from "../tanstack-query"
                         <AntDesign name="lock1" size={24} color={colors.primary800}/>
                         </InputSlot>
                             <InputField 
+                            fontSize="$lg"
                             color={colors.primary800}
                             placeholderTextColor={colors.loginlight}
                             placeholder="密碼"
@@ -102,14 +101,14 @@ import {useSignup} from "../tanstack-query"
                             />
                         </Input>
                     </FormControl>
-                    <TouchableOpacity onPress={()=>mutate({name,email,password})}>
+                    <TouchableOpacity activeOpacity={0.6} onPress={()=>mutate({name,email,password})}>
                         <Box w="$full" py={8} rounded="$full" bg="#194200" >
                         <Text color="#fff" size="2xl" textAlign="center" fontFamily="jf">註冊</Text>
                         </Box>
                     </TouchableOpacity>
                     <HStack>
-                    <Text color="#707769" fontFamily="jf">已經有帳號 ?</Text>
-                    <TouchableOpacity onPress={()=>{dispatch(gotoSignin());}}><Text ml={8} color="#FFA800" fontFamily="jf">點我登入</Text></TouchableOpacity>
+                    <Text fontSize="$lg" color="#707769" fontFamily="jf">已經有帳號 ?</Text>
+                    <TouchableOpacity onPress={()=>{dispatch(gotoSignin());}}><Text fontSize="$lg" ml={8} color="#FFA800" fontFamily="jf">點我登入</Text></TouchableOpacity>
                     </HStack>
                     <Text fontFamily="jf" color="red">{error?.message}</Text>
                 </VStack>

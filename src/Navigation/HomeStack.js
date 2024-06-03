@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { Box,Pressable,Text } from "@gluestack-ui/themed";
+import { Pressable,Text} from "@gluestack-ui/themed";
 import {createStackNavigator} from "@react-navigation/stack"
 import { useNavigation, useTheme } from "@react-navigation/native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -12,6 +12,7 @@ import HomeScreen from "../screens/HomeScreen"
 import EventDetailScreen from "../screens/EventDetailScreen";
 import AddEventScreen from "../screens/AddEventScreen";
 import UnAddActionSheet from "../components/UnAddActionSheet";
+import { useFonts } from "expo-font";
 
 const Stack = createStackNavigator();
 
@@ -29,6 +30,8 @@ export default Home = () => {
     let markIconColor= hasMark?colors.focus:colors.primary500;
     const setmark = ()=>setHasMark(!hasMark);
 
+    const [fontsLoaded]=useFonts({"jf":require("../../assets/fonts/jf-openhuninn-2.0.ttf")}); 
+    if(!fontsLoaded){return <Text>Font is Loading...</Text>;}    
     
     return(
         <Stack.Navigator
@@ -36,7 +39,8 @@ export default Home = () => {
             headerStyle:{ backgroundColor:colors.header},
             headerTitleStyle:{
                 color:colors.primary800,
-                fontSize:20
+                fontSize:20,
+                fontFamily:"jf"
             }
         }}>
             <Stack.Screen name="findEvent" component={HomeScreen} 
