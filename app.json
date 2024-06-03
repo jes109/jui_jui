@@ -26,19 +26,19 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "extra": {
-      "eas": {
-        "projectId": "d65ed6fe-3b00-4234-a384-d2d9a78865e4"
-      }
-    },
     "runtimeVersion": {
       "policy": "appVersion"
     },
     "updates": {
-      "url": "https://u.expo.dev/d65ed6fe-3b00-4234-a384-d2d9a78865e4"
+      "url": "https://u.expo.dev/41e487a4-45dd-4556-b8ad-bfe1501022fe"
     },
     "plugins": [
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "41e487a4-45dd-4556-b8ad-bfe1501022fe"
+      }
+    }
   }
 }
