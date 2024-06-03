@@ -103,7 +103,7 @@ export default SettingDetail = () =>{
                         >
                             <Box style={styles.gamebtn} bg={colors.primary800}>
                                 <Center>
-                                    <MaterialCommunityIcons name="gamepad-variant-outline" size={70} color={colors.primary200}/>
+                                    <MaterialCommunityIcons name="animation-play" size={70} color={colors.primary200}/>
                                 </Center>
                             </Box>
                         </TouchableOpacity>

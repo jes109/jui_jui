@@ -99,13 +99,13 @@ export default GameScreen = ({navigation}) => {
     return(
     <AnimatedCenter flex={1} style={animatedStyle}>
       <AnimatedText
-        fontSize={70}
+        fontSize={50}
         fontWeight={"700"}
         letterSpacing={14}
         marginBottom={35}
         style={animatedTextStyle}
       >
-        THEME
+        outdoor
       </AnimatedText>
       <AnimatedCenter
         w={WIDTH}
