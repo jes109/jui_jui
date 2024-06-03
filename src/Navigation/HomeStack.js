@@ -46,12 +46,12 @@ export default Home = () => {
             <Stack.Screen name="findEvent" component={HomeScreen} 
             options={{
                 title:"探索",
-                headerRight:()=>(
+                /*headerRight:()=>(
                     <Pressable pr={12}>
                         <MaterialCommunityIcons name={notifyIcon} size={24} color={colors.primary800} 
                         onPress={notify?dispatch(readMessage):null} /> 
                     </Pressable>
-                )
+                )*/
             }}
             />
             <Stack.Screen name="detail" component={EventDetailScreen} 

@@ -22,6 +22,12 @@ const activitiesSlice = createSlice({
                 event.mark = !event.mark;
             }
         },
+        changeJoin: (state, action) => {
+            const event = state.data.find(event => event.id === action.payload);
+            if (event) {
+                event.join = !event.join;
+            }
+        },
         setActivities: (state, action) => {
             state.data = action.payload;
         }
@@ -42,7 +48,7 @@ const activitiesSlice = createSlice({
     }
 });
 
-export const { changeMark, setActivities } = activitiesSlice.actions;
+export const { changeMark, setActivities ,changeJoin} = activitiesSlice.actions;
 export const selectActivity = (state) => state.activities.data;
 export default activitiesSlice.reducer;
 

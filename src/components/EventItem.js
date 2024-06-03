@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { Box, HStack, Image, Text, VStack } from "@gluestack-ui/themed";
-import { useTheme } from '@react-navigation/native';
+import { useNavigation, useTheme } from '@react-navigation/native';
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
 
 import { useDispatch, useSelector } from "react-redux";
 import { changeMark, selectActivity } from "../redux/avtivitySlice"
 
 export default EvenItem = ({ event }) => {
+    const {navigate}=useNavigation();
     const [hasMark, setHasMark] = useState(event.mark);
     const { colors } = useTheme();
     const dispatch = useDispatch();
@@ -25,7 +26,9 @@ export default EvenItem = ({ event }) => {
 
     return (
         <Box w={350} rounded="$xl" overflow="hidden" mb={20} alignSelf="center">
-            <Image source={{ uri: `${event.img}` }} alt="bird" w="$full" h={132} />
+            <TouchableOpacity activeOpacity={0.5} onPress={() => navigate("detail", event)}>
+                <Image source={{ uri: `${event.img}` }} alt="bird" w="$full" h={132} />
+            </TouchableOpacity>
             <Box bg={colors.card} pt={12} pb={12} px={8} >
                 <HStack justifyContent="space-between">
                     <VStack>
