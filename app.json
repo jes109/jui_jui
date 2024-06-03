@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "Juijui",
-    "slug": "Juijui",
+    "name": "fin_8_juijui",
+    "slug": "fin_8_juijui",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#EDECD3"
     },
