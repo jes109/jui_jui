@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import { Appearance, Dimensions, useColorScheme } from "react-native";
 import Animated, { interpolateColor, useAnimatedStyle, useDerivedValue, withTiming } from "react-native-reanimated";
 import Ionicon from "react-native-vector-icons/Ionicons";
@@ -34,12 +35,13 @@ const Colors = {
   };
 
 export default GameScreen = ({navigation}) => {
-    const colorScheme = useColorScheme();
+    const systemColorScheme = useColorScheme();
+    const [colorScheme, setColorScheme] = useState(systemColorScheme);
     //const {colors} =useTheme();
 
     const toggleColorMode = () => {
         const nextColorScheme = colorScheme === "light" ? "dark" : "light";
-        Appearance.setColorScheme(nextColorScheme);
+        setColorScheme(nextColorScheme);
     };
 
     const progress = useDerivedValue(() => {

@@ -10,7 +10,7 @@ import { useColorMode } from "@gluestack-ui/themed";
 import GameScreen from "../screens/GameScreen";
 
 export default Game = () =>{
-    const colorScheme = useColorScheme();
+    const systemColorScheme = useColorScheme();
 
     return(
         <SafeAreaProvider>
