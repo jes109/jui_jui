@@ -40,6 +40,14 @@ const ChatRoomList = () =>{
         <Center>
             <Text style={styles.checkmap}>(查看集合點地圖)</Text>
         </Center>
+        <Box>
+            <Input variant="rounded" size="lg" mb={16} w={360} mt={16} >
+                <InputSlot pl={16}>
+                    <InputIcon as={SearchIcon} />
+                </InputSlot>
+                <InputField placeholder="search"/>
+            </Input>
+        </Box>
     </View>
     )
 }
