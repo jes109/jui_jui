@@ -108,10 +108,12 @@ import {useSignin} from "../tanstack-query"
                         <Text color="#fff" size="2xl" textAlign="center" fontFamily="jf">登入</Text>
                         </Box>
                     </TouchableOpacity>
+                    <Center>
                     <HStack>
                     <Text fontSize="$lg" color="#707769" fontFamily="jf">還沒有帳號 ?</Text>
                     <TouchableOpacity onPress={()=>dispatch(gotoSignup())}><Text fontSize="$lg" ml={8} color="#FFA800" fontFamily="jf">點我註冊</Text></TouchableOpacity>
                     </HStack>
+                    </Center>
                     <Text fontFamily="jf" color="red">{error?.message}</Text>
                 </VStack>
         </ScrollView>

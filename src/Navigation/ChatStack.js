@@ -6,6 +6,7 @@ import {useTheme } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import AntDesign from "react-native-vector-icons/AntDesign";
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from "@react-navigation/drawer";
 
@@ -17,9 +18,9 @@ import { useFonts } from "expo-font";
 
 const Stack = createStackNavigator();
 
-export default ChatStack = ({navigation}) => {
-    //const {navigation} = useNavigation();
+export default ChatStack = () => {
     const {colors}=useTheme();
+    const {navigate}=useNavigation();
 
     const [fontsLoaded]=useFonts({"jf":require("../../assets/fonts/jf-openhuninn-2.0.ttf")}); 
     if(!fontsLoaded){return <Text>Font is Loading...</Text>;}    
@@ -52,8 +53,24 @@ export default ChatStack = ({navigation}) => {
                 )
             }}
             />
-            <Stack.Screen name="ChatRoom" component={ChatRoomScreen}/>
-            <Stack.Screen name="ChatMap" component={ChatMapScreen}/>
+            <Stack.Screen name="ChatRoom" component={ChatRoomScreen}
+            options={{
+                title: "團員聊天室",
+                headerLeft:()=>(
+                    <Pressable pl={12}>
+                        <AntDesign name="left" size={24} color={colors.primary800} onPress={()=>navigate("Chat")} /> 
+                    </Pressable>)
+            }}
+            />
+            <Stack.Screen name="ChatMap" component={ChatMapScreen}
+            options={{
+                title: "集合點",
+                headerLeft:()=>(
+                    <Pressable pl={12}>
+                        <AntDesign name="left" size={24} color={colors.primary800} onPress={()=>navigate("ChatRoom")} /> 
+                    </Pressable>)
+            }}
+            />
         </Stack.Navigator>
     )
 }
