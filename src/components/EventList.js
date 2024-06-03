@@ -1,20 +1,19 @@
 import React from "react";
-import { FlatList, InputIcon } from "@gluestack-ui/themed";
-import { Box,Image,Pressable,Text,Center, Input, InputField,SearchIcon } from "@gluestack-ui/themed";
+import { FlatList, InputIcon,InputSlot } from "@gluestack-ui/themed";
+import { Box, Input, InputField,SearchIcon } from "@gluestack-ui/themed";
 import {useTheme } from '@react-navigation/native';
+import { useFonts } from "expo-font";
 
 import EventItem from "./EventItem";
-
 import Events from "../json/Events.json"
-import { InputSlot } from "@gluestack-ui/themed";
 
 export default EventList = () =>{
     const { colors } = useTheme();
 
-    const renderItem=({item})=><EventItem event={item}/>;
-
+    const [fontsLoaded]=useFonts({"jf":require("../../assets/fonts/jf-openhuninn-2.0.ttf")}); 
+    if(!fontsLoaded){return <Text>Font is Loading...</Text>;}
     
-
+    const renderItem=({item})=><EventItem event={item}/>;
     return(
         <FlatList
         ListHeaderComponent={(
@@ -23,7 +22,7 @@ export default EventList = () =>{
                     <InputSlot pl={16}>
                         <InputIcon as={SearchIcon} />
                     </InputSlot>
-                    <InputField placeholder="search"/>
+                    <InputField fontFamily="jf" placeholder="search"/>
                 </Input>
             </Box>
         )}

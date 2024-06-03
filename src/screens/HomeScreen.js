@@ -1,5 +1,5 @@
 import React from "react";
-import { Box,Image,Pressable,Text,Center, Input, InputField ,Fab,FabIcon,EditIcon ,HStack,Icon,AddIcon} from "@gluestack-ui/themed";
+import { Box,Center} from "@gluestack-ui/themed";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"

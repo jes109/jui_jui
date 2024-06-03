@@ -1,12 +1,11 @@
-import React,{ useState,useEffect } from "react";
-import {Image,Box,AlertCircleIcon,VStack,Text, FormControl, Input, InputField, ScrollView, FormControlError, FormControlErrorText, FormControlErrorIcon, Center, InputSlot, HStack } from "@gluestack-ui/themed"
+import React, { useState } from "react";
+import {InputIcon,EyeOffIcon,EyeIcon,Image,Box,VStack,Text, FormControl, Input, InputField, ScrollView,Center, InputSlot, HStack } from "@gluestack-ui/themed"
 import {TouchableOpacity } from "react-native";
-import { useSelector,useDispatch} from "react-redux"
+import {useDispatch} from "react-redux"
 import AntDesign from "react-native-vector-icons/AntDesign"
 import { useFonts } from "expo-font";
 
-import { gotoSignup, selectGeneral } from "../redux/accountSlice";
-import { setGeneralAccount,login} from "../redux/accountSlice";
+import { gotoSignup} from "../redux/accountSlice";
 import {useSignin} from "../tanstack-query"
 
 
@@ -16,6 +15,12 @@ import {useSignin} from "../tanstack-query"
     const {colors}=theme;
 
     const dispatch=useDispatch();
+    const [showPassword, setShowPassword] = useState(false)
+    const handleState = () => {
+    setShowPassword((showState) => {
+      return !showState
+    })
+  }
     /*
     const general=useSelector(selectGeneral);
     const [isInitialRender, setIsInitialRender] = useState(true);
@@ -63,6 +68,7 @@ import {useSignin} from "../tanstack-query"
                                 <AntDesign name="mail" size={24} color={colors.primary800}/>
                             </InputSlot>
                             <InputField 
+                            fontSize="$lg"
                             color={colors.primary800}
                             placeholderTextColor={colors.loginlight}
                             placeholder="電子郵件"
@@ -79,24 +85,32 @@ import {useSignin} from "../tanstack-query"
                         <AntDesign name="lock1" size={24} color={colors.primary800}/>
                         </InputSlot>
                             <InputField 
+                            fontSize="$lg"
                             color={colors.primary800}
                             placeholderTextColor={colors.loginlight}
                             placeholder="密碼"
                             fontFamily="jf"
-                            type="password"
+                            type={showPassword ? "text" : "password"}
                             value={password}
                             onChangeText={(password)=>{setPassword(password)}}
                             />
+                            <InputSlot pr="$3" onPress={handleState}>
+                                <InputIcon
+                                size="xl"
+                                as={showPassword ? EyeIcon : EyeOffIcon}
+                                color={colors.loginlight}
+                                />
+                            </InputSlot>
                         </Input>
                     </FormControl>
-                    <TouchableOpacity onPress={()=>mutate({email,password})}>
+                    <TouchableOpacity activeOpacity={0.6} onPress={()=>mutate({email,password})}>
                         <Box w="$full" py={8} rounded="$full" bg="#194200" >
                         <Text color="#fff" size="2xl" textAlign="center" fontFamily="jf">登入</Text>
                         </Box>
                     </TouchableOpacity>
                     <HStack>
-                    <Text color="#707769" fontFamily="jf">還沒有帳號 ?</Text>
-                    <TouchableOpacity onPress={()=>dispatch(gotoSignup())}><Text ml={8} color="#FFA800" fontFamily="jf">點我註冊</Text></TouchableOpacity>
+                    <Text fontSize="$lg" color="#707769" fontFamily="jf">還沒有帳號 ?</Text>
+                    <TouchableOpacity onPress={()=>dispatch(gotoSignup())}><Text fontSize="$lg" ml={8} color="#FFA800" fontFamily="jf">點我註冊</Text></TouchableOpacity>
                     </HStack>
                     <Text fontFamily="jf" color="red">{error?.message}</Text>
                 </VStack>

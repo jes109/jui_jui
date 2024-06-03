@@ -10,6 +10,7 @@ import {selectMessage ,readMessage} from "../redux/messageSlice"
 import SaveScreen from "../screens/SaveScreen";
 import EventDetailScreen from "../screens/EventDetailScreen";
 import JoinScreen from "../screens/JoinScreen";
+import { useFonts } from "expo-font";
 
 
 const Stack = createStackNavigator();
@@ -28,6 +29,9 @@ export default SaveStack=()=>{
     const [notify,setNotify]=useState(hasRead);
     let notifyIcon=notify?"bell-badge":"bell";
 
+    const [fontsLoaded]=useFonts({"jf":require("../../assets/fonts/jf-openhuninn-2.0.ttf")}); 
+    if(!fontsLoaded){return <Text>Font is Loading...</Text>;}    
+    
     return(
         <Stack.Navigator
         screenOptions={{
@@ -35,7 +39,8 @@ export default SaveStack=()=>{
             headerStyle:{ backgroundColor:colors.header},
             headerTitleStyle:{
                 color:colors.primary800,
-                fontSize:20
+                fontSize:20,
+                fontFamily:"jf"
             }
         }}>
             <Stack.Screen name="Save" component={SaveScreen} 

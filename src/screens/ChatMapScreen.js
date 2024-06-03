@@ -1,19 +1,36 @@
 import React from "react";
-import { StyleSheet } from "react-native";
-import { Box, Image, ScrollView, Text ,Center} from "@gluestack-ui/themed";
-import { useNavigation, useTheme } from "@react-navigation/native";
+import { useState } from "react";
+import MapView from "react-native-maps";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { GluestackUIProvider, Box } from "@gluestack-ui/themed";
+import { Center,Text } from "@gluestack-ui/themed";
+import { config } from "@gluestack-ui/config";
 
 import Map from "../components/Map"
+import { useTheme } from "@react-navigation/native";
 
 const ChatMapScreen = ({navigation}) => {
     const {colors}=useTheme();
+    let region = {
+        longitude: 121.544637,
+        latitude: 25.024624,
+        longitudeDelta: 0.01,
+        latitudeDelta: 0.02,
+    };
 
     return(
-        <ScrollView bg={colors.card} flex={1}>
-            <Center>
-                <Map />
-            </Center>
-        </ScrollView>
+        <SafeAreaProvider>
+            <GluestackUIProvider config={config}>
+                <Box flex={1}>
+                <MapView
+                    region={region}
+                    style={{ flex: 1 }}
+                    showsTraffic
+                    mapType='standard'
+                />
+                </Box>
+            </GluestackUIProvider>
+        </SafeAreaProvider>
     )
 }
 
