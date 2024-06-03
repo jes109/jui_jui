@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { StyleSheet } from "react-native";
 import { Box,HStack,Image,Pressable,Text, VStack} from "@gluestack-ui/themed";
@@ -6,11 +6,21 @@ import { useNavigation,useTheme } from '@react-navigation/native';
 import { TouchableOpacity } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
 
+import { useDispatch, useSelector } from "react-redux";
+import {changeMark,selectActivity} from "../redux/avtivitySlice"
+
 export default JoinItem =({event})=>{
     const [hasMark,setHasMark]=useState(event.mark);
 
+    const activity = useSelector((state) => selectActivity(state, event.id));
+    useEffect(() => {
+        setHasMark(activity?.mark);
+    }, [activity?.mark]);
+
     const {navigate} = useNavigation();
     const { colors } = useTheme();
+
+    const dispatch=useDispatch();
 
     let markIcon= hasMark?"bookmark":"bookmark-outline";
     let markIconColor= hasMark?colors.focus:colors.primary500;

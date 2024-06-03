@@ -13,8 +13,8 @@ import {fetchActivities,selectActivity} from "../redux/avtivitySlice";
 export default EventList = () =>{
     const { colors } = useTheme();
     const [data, setData] = useState([]);
-
     const dispatch = useDispatch();
+
     const activities = useSelector(selectActivity);
 
     useEffect(() => {
@@ -36,8 +36,8 @@ export default EventList = () =>{
 
       useEffect(() => {
         console.log(data);
-      }, [data]);*/
-
+      }, [data]);
+    */
     const renderItem=({item})=><EventItem event={item}/>;
     return(
         <FlatList

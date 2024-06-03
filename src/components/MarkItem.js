@@ -1,16 +1,26 @@
-import React from "react";
-import { useState } from "react";
+import React, { useEffect } from "react";
+import { useState} from "react";
 import { StyleSheet } from "react-native";
 import { Box,HStack,Image,Pressable,Text, VStack} from "@gluestack-ui/themed";
 import { useNavigation,useTheme } from '@react-navigation/native';
 import { TouchableOpacity } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
 
+import { useDispatch, useSelector } from "react-redux";
+import {changeMark,selectActivity} from "../redux/avtivitySlice"
+
 export default MarkItem =({event})=>{
     const [hasMark,setHasMark]=useState(event.mark);
 
+    const activity = useSelector((state) => selectActivity(state, event.id));
+    useEffect(() => {
+        setHasMark(activity?.mark);
+    }, [activity?.mark]);
+
     const {navigate} = useNavigation();
     const { colors } = useTheme();
+
+    const dispatch=useDispatch();
 
     let markIcon= hasMark?"bookmark":"bookmark-outline";
     let markIconColor= hasMark?colors.focus:colors.primary500;
@@ -28,7 +38,7 @@ export default MarkItem =({event})=>{
                         <Text fontSize={16} bold="true" mt={8} color={colors.primary500}>{event.location}</Text>
                     </VStack>
                     <Box justifyContent="flex-end">
-                    <MaterialCommunityIcons style={styles.btn} name={markIcon} size={28} color={markIconColor} onPress={setmark} />
+                    <MaterialCommunityIcons style={styles.btn} name="bookmark" size={28} color={colors.focus} onPress={()=>{setmark();dispatch(changeMark(event.id))}} />
                     </Box>
                 </HStack>
 

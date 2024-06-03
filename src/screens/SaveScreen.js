@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import SegmentedControlTab from "react-native-segmented-control-tab"
 import { Box,Center,Pressable,Text ,FlatList, ScrollView} from "@gluestack-ui/themed";
@@ -10,6 +10,8 @@ import JoinItem from "../components/JoinItem";
 import MarkItem from "../components/MarkItem";
 
 import Events from "../json/Events.json"
+import { useDispatch, useSelector } from "react-redux";
+import {selectActivity,fetchActivities} from "../redux/avtivitySlice"
 
 export default SaveScreen = () => {
     const {colors} =useTheme();
@@ -44,13 +46,19 @@ export default SaveScreen = () => {
 }
 
 const Mark=()=>{
+    const dispatch = useDispatch();
+    const activities = useSelector(selectActivity);
+
+    useEffect(() => {
+        dispatch(fetchActivities());
+    }, [dispatch]);
     const renderItem=({item})=>item.mark?<MarkItem event={item}/>:null;
 
     return(
         <ScrollView>
         <Center>
             <FlatList
-            data={Events}
+            data={activities}
             renderItem={renderItem}
             keyExtractor={(item,index)=>index+item}
             showsVerticalScrollIndicator={false}
@@ -61,12 +69,18 @@ const Mark=()=>{
     )
 }
 const Join=()=>{
+    const dispatch = useDispatch();
+    const activities = useSelector(selectActivity);
+
+    useEffect(() => {
+        dispatch(fetchActivities());
+    }, [dispatch]);
     const renderItem=({item})=>item.join?<JoinItem event={item}/>:null;
 
     return(
         <Center>
             <FlatList
-            data={Events}
+            data={activities}
             renderItem={renderItem}
             keyExtractor={(item,index)=>index+item}
             showsVerticalScrollIndicator={false}

@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getActs } from "../api/firebase";
+import { collection,onSnapshot } from "firebase/firestore";
+
 
 export const fetchActivities = createAsyncThunk('activities/fetchActivities', async () => {
     const actsData = await getActs();
@@ -13,7 +15,17 @@ const activitiesSlice = createSlice({
         status: 'idle',
         error: null
     },
-    reducers: {},
+    reducers: {
+        changeMark: (state, action) => {
+            const event = state.data.find(event => event.id === action.payload);
+            if (event) {
+                event.mark = !event.mark;
+            }
+        },
+        setActivities: (state, action) => {
+            state.data = action.payload;
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchActivities.pending, (state) => {
@@ -30,5 +42,14 @@ const activitiesSlice = createSlice({
     }
 });
 
+export const { changeMark, setActivities } = activitiesSlice.actions;
 export const selectActivity = (state) => state.activities.data;
 export default activitiesSlice.reducer;
+
+export const listenToActivities = () => (dispatch) => {
+    const actsRef = collection(db, "activities");
+    onSnapshot(actsRef, (snapshot) => {
+        const actsData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        dispatch(setActivities(actsData));
+    });
+};
