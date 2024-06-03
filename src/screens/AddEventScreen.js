@@ -69,7 +69,11 @@ export default AddEventScreen = () =>{
             </ModalCloseButton>
           </ModalHeader>
           <ModalBody>
-            <Box bg={colors.primary500} w={280} h={280} alignSelf="center"/>
+            <Box bg={colors.primary500} w={280} h={280} alignSelf="center">
+            <Image source={require("../img/diary2.jpg")} alt="img" w="$full" h={240}/>
+            <Image source={require("../img/diary2.jpg")} alt="img" w="$full" h={240}/>
+            <Image source={require("../img/diary2.jpg")} alt="img" w="$full" h={240}/>
+            </Box>
           </ModalBody>
           <ModalFooter />
         </ModalContent>

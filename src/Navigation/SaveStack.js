@@ -20,7 +20,7 @@ export default SaveStack=()=>{
     const {colors}=useTheme();
     const {navigate}=useNavigation();
     let notifyIcon="bell";
-/*
+
     const [hasMark,setHasMark]=useState(false);
     let markIcon= hasMark?"bookmark":"bookmark-outline";
     let markIconColor= hasMark?colors.focus:colors.primary500;
@@ -31,8 +31,8 @@ export default SaveStack=()=>{
     const hasRead=useSelector(selectMessage);
     const dispatch=useDispatch();
     const [notify,setNotify]=useState(hasRead);
-    let notifyIcon=notify?"bell-badge":"bell";
-*/
+    //let notifyIcon=notify?"bell-badge":"bell";
+
     const [fontsLoaded]=useFonts({"jf":require("../../assets/fonts/jf-openhuninn-2.0.ttf")}); 
     if(!fontsLoaded){return <Text>Font is Loading...</Text>;}    
     
