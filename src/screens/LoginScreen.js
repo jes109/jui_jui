@@ -1,50 +1,54 @@
 import React,{ useState,useEffect } from "react";
 import {Image,Box,AlertCircleIcon,VStack,Text, FormControl, Input, InputField, ScrollView, FormControlError, FormControlErrorText, FormControlErrorIcon, Center, InputSlot, HStack } from "@gluestack-ui/themed"
-import { StyleSheet, TouchableOpacity } from "react-native";
+import {TouchableOpacity } from "react-native";
 import { useSelector,useDispatch} from "react-redux"
 import AntDesign from "react-native-vector-icons/AntDesign"
 import { useFonts } from "expo-font";
 
 import { gotoSignup, selectGeneral } from "../redux/accountSlice";
 import { setGeneralAccount,login} from "../redux/accountSlice";
+import {useSignin} from "../tanstack-query"
 
 
  const LoginScreen=({theme})=>{
+    const {mutate,data,isSuccess,isError,error}=useSignin();
+
     const {colors}=theme;
 
-    const general=useSelector(selectGeneral);
     const dispatch=useDispatch();
-
+    /*
+    const general=useSelector(selectGeneral);
     const [isInitialRender, setIsInitialRender] = useState(true);
-    const [name,setName]=useState(general.name);
-    const [email,setEmail]=useState(general.email);
-    const [nameIsError, setNameIsError] = useState(false);
     const [emailIsError, setEmailIsError] = useState(false);
-    
-    const nameRegex=/^[a-zA-Z]+\w*$/;
+    const [passwordIsError, setPasswordIsError] = useState(false);
+    const passwordRegex=/^[a-zA-Z]+\w*$/;
     const emailRegex=/\w{3,}@[a-zA_Z_]+\.[a-zA_Z]{2,5}/
+    */
+    const [email,setEmail]=useState("");
+    const [password,setPassword]=useState("");
+    
 
     const [fontsLoaded]=useFonts({
         "jf":require("../../assets/fonts/jf-openhuninn-2.0.ttf")
     });
+    if(!fontsLoaded){
+        return <Text>Font is Loading...</Text>;
+    }
+        /*
     useEffect(()=>{
         if (isInitialRender) {
             setIsInitialRender(false); 
           } 
         else {
-            if(!nameIsError && !emailIsError)
-            dispatch(setGeneralAccount({name,email}))
-            if (nameRegex.test(name)) setNameIsError(false);
-            else setNameIsError(true);
+            if(!passwordIsError && !emailIsError)
+            dispatch(setGeneralAccount({password,email}))
+            if (passwordRegex.test(password)) setPasswordIsError(false);
+            else setPasswordIsError(true);
             if (emailRegex.test(email)) setEmailIsError(false);
             else setEmailIsError(true);
         }
-    },[name,email])
-
-        
-    if(!fontsLoaded){
-        return <Text>Loading...</Text>;
-    }
+    },[password,email])
+*/
 
     return(
         <ScrollView scrollEnabled={false} bg={colors.lightsurface} flex={1}>
@@ -63,14 +67,11 @@ import { setGeneralAccount,login} from "../redux/accountSlice";
                             placeholderTextColor={colors.loginlight}
                             placeholder="電子郵件"
                             fontFamily="jf"
+                            type="email"
                             value={email}
                             onChangeText={(email)=>{setEmail(email)
                             }}/>
                         </Input>
-                        <FormControlError isInvalid={emailIsError}>
-                            <FormControlErrorIcon as={AlertCircleIcon}/> 
-                            <FormControlErrorText fontFamily="jf">帳號輸入錯誤</FormControlErrorText>
-                        </FormControlError>
                     </FormControl>
                     <FormControl mb={5} isRequired w={280}>
                         <Input variant="underlined" borderColor={colors.primary500}>
@@ -81,20 +82,14 @@ import { setGeneralAccount,login} from "../redux/accountSlice";
                             color={colors.primary800}
                             placeholderTextColor={colors.loginlight}
                             placeholder="密碼"
-                            value={name}
                             fontFamily="jf"
-                            onChangeText={(name)=>{setName(name)}}
+                            type="password"
+                            value={password}
+                            onChangeText={(password)=>{setPassword(password)}}
                             />
                         </Input>
-                        <FormControlError isInvalid={nameIsError}>
-                            <FormControlErrorIcon as={AlertCircleIcon}/> 
-                            <FormControlErrorText fontFamily="jf">密碼輸入錯誤</FormControlErrorText>
-                        </FormControlError>
                     </FormControl>
-                    <TouchableOpacity onPress={()=>{
-
-                        if(!nameIsError && !emailIsError)dispatch(login());
-                        }}>
+                    <TouchableOpacity onPress={()=>mutate({email,password})}>
                         <Box w="$full" py={8} rounded="$full" bg="#194200" >
                         <Text color="#fff" size="2xl" textAlign="center" fontFamily="jf">登入</Text>
                         </Box>
@@ -103,9 +98,23 @@ import { setGeneralAccount,login} from "../redux/accountSlice";
                     <Text color="#707769" fontFamily="jf">還沒有帳號 ?</Text>
                     <TouchableOpacity onPress={()=>dispatch(gotoSignup())}><Text ml={8} color="#FFA800" fontFamily="jf">點我註冊</Text></TouchableOpacity>
                     </HStack>
+                    <Text fontFamily="jf" color="red">{error?.message}</Text>
                 </VStack>
         </ScrollView>
     )
 }
 
 export default LoginScreen;
+
+{
+    /*
+    <FormControlError isInvalid={emailIsError}>
+        <FormControlErrorIcon as={AlertCircleIcon}/> 
+        <FormControlErrorText fontFamily="jf">帳號輸入錯誤</FormControlErrorText>
+    </FormControlError>
+    <FormControlError isInvalid={passwordIsError}>
+        <FormControlErrorIcon as={AlertCircleIcon}/> 
+        <FormControlErrorText fontFamily="jf">密碼輸入錯誤</FormControlErrorText>
+    </FormControlError>
+    */
+}

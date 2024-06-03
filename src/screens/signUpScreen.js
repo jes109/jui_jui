@@ -1,52 +1,51 @@
 import React,{ useState,useEffect } from "react";
 import {Image,HStack,Box,AlertCircleIcon,VStack,Text, FormControl, Input, InputField, ScrollView, FormControlError, FormControlErrorText, FormControlErrorIcon, Center, InputSlot } from "@gluestack-ui/themed"
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { useSelector,useDispatch} from "react-redux"
 import AntDesign from "react-native-vector-icons/AntDesign"
 import { useFonts } from "expo-font";
 
-import { selectGeneral } from "../redux/accountSlice";
-import { setGeneralAccount,gotoSignin,gotoSignup,login } from "../redux/accountSlice";
+import { gotoSignin } from "../redux/accountSlice";
 
-import { selectSign} from "../redux/accountSlice";
+import {useSignup} from "../tanstack-query"
 
  const LoginScreen=({theme})=>{
-    const hasAccount = useSelector(selectSign);
-
-    const {colors}=theme;
-
-    const general=useSelector(selectGeneral);
+    const {mutate,error}=useSignup();
     const dispatch=useDispatch();
 
+    const {colors}=theme;
+    /*
+    const general=useSelector(selectGeneral);
     const [isInitialRender, setIsInitialRender] = useState(true);
-    const [name,setName]=useState(general.name);
-    const [email,setEmail]=useState(general.email);
-    const [nameIsError, setNameIsError] = useState(false);
+    const [passwordIsError, setPasswordIsError] = useState(false);
     const [emailIsError, setEmailIsError] = useState(false);
-    
-    const nameRegex=/^[a-zA-Z]+\w*$/;
+
+    const passwordRegex=/^[a-zA-Z]+\w*$/;
     const emailRegex=/\w{3,}@[a-zA_Z_]+\.[a-zA_Z]{2,5}/
 
-    const [fontsLoaded]=useFonts({
-        "jf":require("../../assets/fonts/jf-openhuninn-2.0.ttf")
-    });
     useEffect(()=>{
         if (isInitialRender) {
             setIsInitialRender(false); 
           } 
         else {
-            if(!nameIsError && !emailIsError)
-            dispatch(setGeneralAccount({name,email}))
-            if (nameRegex.test(name)) setNameIsError(false);
-            else setNameIsError(true);
+            if(!passwordIsError && !emailIsError)
+            dispatch(setGeneralAccount({password,email,name}))
+            if (passwordRegex.test(password)) setPasswordIsError(false);
+            else setPasswordIsError(true);
             if (emailRegex.test(email)) setEmailIsError(false);
             else setEmailIsError(true);
         }
-    },[name,email])
+    },[password,email])
+    */
+    const [name,setName]=useState("");
+    const [email,setEmail]=useState("");
+    const [password,setPassword]=useState("");
 
-        
+    const [fontsLoaded]=useFonts({
+        "jf":require("../../assets/fonts/jf-openhuninn-2.0.ttf")
+    }); 
     if(!fontsLoaded){
-        return <Text>Loading...</Text>;
+        return <Text>Font is Loading...</Text>;
     }
 
     return(
@@ -66,9 +65,9 @@ import { selectSign} from "../redux/accountSlice";
                             placeholderTextColor={colors.loginlight}
                             placeholder="名字"
                             fontFamily="jf"
-                            value={email}
-                            onChangeText={(email)=>{setEmail(email)
-                            }}/>
+                            type="name"
+                            value={name}
+                            onChangeText={(name)=>{setName(name)}}/>
                         </Input>
                     </FormControl>
                     <FormControl mb={5} isRequired w={280}>
@@ -81,14 +80,11 @@ import { selectSign} from "../redux/accountSlice";
                             placeholderTextColor={colors.loginlight}
                             placeholder="電子郵件"
                             fontFamily="jf"
+                            type="email"
                             value={email}
                             onChangeText={(email)=>{setEmail(email)
                             }}/>
                         </Input>
-                        <FormControlError isInvalid={emailIsError}>
-                            <FormControlErrorIcon as={AlertCircleIcon}/> 
-                            <FormControlErrorText fontFamily="jf">帳號輸入錯誤</FormControlErrorText>
-                        </FormControlError>
                     </FormControl>
                     <FormControl mb={5} isRequired w={280}>
                         <Input variant="underlined" borderColor={colors.primary500}>
@@ -99,28 +95,23 @@ import { selectSign} from "../redux/accountSlice";
                             color={colors.primary800}
                             placeholderTextColor={colors.loginlight}
                             placeholder="密碼"
-                            value={name}
                             fontFamily="jf"
-                            onChangeText={(name)=>{setName(name)}}
+                            type="password"
+                            value={password}
+                            onChangeText={(password)=>{setPassword(password)}}
                             />
                         </Input>
-                        <FormControlError isInvalid={nameIsError}>
-                            <FormControlErrorIcon as={AlertCircleIcon}/> 
-                            <FormControlErrorText fontFamily="jf">密碼輸入錯誤</FormControlErrorText>
-                        </FormControlError>
                     </FormControl>
-                    <TouchableOpacity onPress={()=>{
-
-                        if(!nameIsError && !emailIsError)dispatch(login());
-                        }}>
+                    <TouchableOpacity onPress={()=>mutate({name,email,password})}>
                         <Box w="$full" py={8} rounded="$full" bg="#194200" >
                         <Text color="#fff" size="2xl" textAlign="center" fontFamily="jf">註冊</Text>
                         </Box>
                     </TouchableOpacity>
                     <HStack>
                     <Text color="#707769" fontFamily="jf">已經有帳號 ?</Text>
-                    <TouchableOpacity onPress={()=>{dispatch(gotoSignin());console.log({hasAccount})}}><Text ml={8} color="#FFA800" fontFamily="jf">點我登入</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{dispatch(gotoSignin());}}><Text ml={8} color="#FFA800" fontFamily="jf">點我登入</Text></TouchableOpacity>
                     </HStack>
+                    <Text fontFamily="jf" color="red">{error?.message}</Text>
                 </VStack>
         </ScrollView>
     )

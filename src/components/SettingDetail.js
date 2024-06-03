@@ -1,33 +1,27 @@
 import React from "react";
 import { useState } from "react";
-import { HStack, VStack } from "@gluestack-ui/themed";
-import { config } from "@gluestack-ui/config";
 import { StyleSheet, TouchableOpacity } from "react-native";
-import { Switch, Button, Box, View, Pressable, Image, Text, Center, Actionsheet, ActionsheetBackdrop, ActionsheetContent, ActionsheetItem, ActionsheetItemText, GluestackUIProvider } from "@gluestack-ui/themed";
+import { HStack ,Box, View, Pressable, Image, Text, Center, Actionsheet, ActionsheetBackdrop, ActionsheetContent, ActionsheetItem, ActionsheetItemText, GluestackUIProvider } from "@gluestack-ui/themed";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import { useSelector,useDispatch } from "react-redux";
 import {selectLogin,logout} from "../redux/accountSlice"
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
 
+import { useSignout } from "../tanstack-query";
 //import { CommonActions } from "@react-navigation/native";
 //import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
 
 export default SettingDetail = () =>{
+    const { mutate } = useSignout(); 
+
     const navigation = useNavigation();
     const [showActionsheet, setShowActionsheet] = React.useState(false);
-
-    const dispatch=useDispatch();
-    const hasLogin =useSelector(selectLogin);
 
     const handleClose = () => setShowActionsheet(!showActionsheet);
     const HorizontalLine = () => {
         return (
             <View style={styles.line} />
         );
-    };
-    const close = () => {
-        setShowActionsheet(false);
-        dispatch(logout());
     };
     //const {goBack} =useNavigation();
     const {colors} = useTheme();
@@ -132,9 +126,9 @@ export default SettingDetail = () =>{
                             <Text style={styles.sure}>確定登出?</Text>
                             <HorizontalLine />
                             <Center>
-                                <ActionsheetItem onPress={close}>
+                                <ActionsheetItem onPress={()=>{setShowActionsheet(false);mutate();}}>
                                     <Center>
-                                        <ActionsheetItemText style={styles.item}><Text style={styles.yes}>Yes</Text></ActionsheetItemText>
+                                        <ActionsheetItemText style={styles.item}><Text style={styles.yes}>確定</Text></ActionsheetItemText>
                                     </Center>
                                 </ActionsheetItem>
                             </Center>
@@ -142,7 +136,7 @@ export default SettingDetail = () =>{
                             <Center>
                                 <ActionsheetItem onPress={handleClose}>
                                     <Center>
-                                        <ActionsheetItemText style={styles.item}><Text style={styles.cancel}>Cancel</Text></ActionsheetItemText>
+                                        <ActionsheetItemText style={styles.item}><Text style={styles.cancel}>取消</Text></ActionsheetItemText>
                                     </Center>
                                 </ActionsheetItem>
                             </Center>
