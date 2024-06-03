@@ -101,9 +101,9 @@ export default SettingDetail = () =>{
                             activeOpacity={0.6}
                             onPress={() => navigate('Game')}
                         >
-                            <Box style={styles.gamebtn} bg={colors.primary800}>
+                            <Box style={styles.gamebtn} bg={colors.logincard}>
                                 <Center>
-                                    <MaterialCommunityIcons name="animation-play" size={70} color={colors.primary200}/>
+                                    <MaterialCommunityIcons name="animation-play" size={70} color={colors.primary800}/>
                                 </Center>
                             </Box>
                         </TouchableOpacity>
