@@ -17,7 +17,8 @@ const MyTheme = {
         header:"#F6F7E3",
         focus:"#FFC700",
         logincard:"#E0F2BB",
-        loginlight:"#87A772"
+        loginlight:"#87A772",
+        white:"#fff"
     }
 }
 

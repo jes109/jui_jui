@@ -213,7 +213,7 @@ const styles=StyleSheet.create(
             //justifyContent: "center",
             //alignItems: "center",
             textAlign: "center",
-            color: 'red'
+            color: '#194200'
         },
         word: {
             marginLeft: 25,

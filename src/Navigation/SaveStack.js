@@ -53,7 +53,7 @@ export default SaveStack=()=>{
                 headerRight:()=>(
                     <Pressable pr={12}>
                         <MaterialCommunityIcons name={notifyIcon} size={24} color={colors.primary800} 
-                         /> 
+                         onPress={()=>navigate("notify")}/> 
                     </Pressable>
                 )
             }}
@@ -83,7 +83,7 @@ export default SaveStack=()=>{
             />
             <Stack.Screen name="notify" component={NotifyScreen} 
              options={{
-                title:"",
+                title:"通知",
                 headerLeft:()=>(
                     <Pressable pl={12}>
                         <AntDesign name="left" size={24} color={colors.primary800} onPress={()=>navigate("Save")} /> 
