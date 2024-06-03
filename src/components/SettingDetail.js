@@ -111,7 +111,7 @@ export default SettingDetail = () =>{
                 </Center>
 
                 <Center>
-                    <Text style={styles.switch}>(按此切換狀態)</Text>
+                    <Text style={styles.switch}>(按此進入動畫)</Text>
                 </Center>
                 <Box>
                     <Center>
