@@ -1,6 +1,6 @@
 import { getApps, getApp, initializeApp } from "firebase/app";
 import { getReactNativePersistence,initializeAuth,getAuth,signInWithEmailAndPassword,createUserWithEmailAndPassword} from "firebase/auth";
-import { getFirestore,doc,setDoc,getDoc,getDocs,collection,initializeFirestore } from "firebase/firestore";
+import { onSnapshot,getFirestore,doc,setDoc,getDoc,getDocs,collection,initializeFirestore } from "firebase/firestore";
 import ReactNativeAsyncStorage from "@react-native-async-storage/async-storage";
 
 
@@ -49,4 +49,11 @@ const firebaseConfig = {
 
   export const signout=async()=>{
     await auth.signOut();
+  }
+
+  export const getActs = async()=>{
+    const actsRef=collection(db,"activities");
+    const DocsSnap=await getDocs(actsRef);
+    const actsData=DocsSnap.docs.map(doc => ({id: doc.id, ...doc.data()}));
+    return actsData;
   }

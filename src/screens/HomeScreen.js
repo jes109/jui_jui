@@ -1,16 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box,Center} from "@gluestack-ui/themed";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
 
 import EventList from "../components/EventList"
+import { getActs } from "../api/firebase";
 
 export default Home = () => {
     const {colors} =useTheme();
     const {navigate}=useNavigation();
     return(
-        <Box bg={colors.surface}>
+        <Box flex={1} bg={colors.surface}>
             <Center>
                 <EventList/>
                 <Box style={styles.fabBack} bg={colors.surface}>

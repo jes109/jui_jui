@@ -6,6 +6,8 @@ import { useNavigation, useTheme } from "@react-navigation/native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
 import UnAddActionSheet from "../components/UnAddActionSheet";
 
+import { getActs } from "../api/firebase";
+
 export default AddEventScreen = () =>{
     const {colors} =useTheme();
     const {goBack}=useNavigation();
@@ -44,7 +46,7 @@ export default AddEventScreen = () =>{
                         <TextInput scrollEnabled={false} numberOfLines={2} multiline={true} style={[styles.textInput,{color:colors.primary800}]} placeholder="敘述"/>
                     </HStack>
                 </Box>
-                <TouchableOpacity style={styles.fab} activeOpacity={0.6} onPress={()=>goBack()}>
+                <TouchableOpacity style={styles.fab} activeOpacity={0.6} onPress={()=>{goBack();getActs}}>
                     <HStack bg={colors.primaryContainer}  py={12} rounded="$full" flex={1} justifyContent="center">
                         <Icon as={AddIcon} color={colors.primary800}/>
                         <Text color={colors.primary800} bold={true}>發佈</Text>

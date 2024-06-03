@@ -16,6 +16,8 @@ const MyTheme = {
         darksurface:"#E8E7C7",
         header:"#646561",
         focus:"#9EC52F",
+        logincard:"#E0F2BB",
+        loginlight:"#87A772"
     }
 }
 
