@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, InputIcon,InputSlot } from "@gluestack-ui/themed";
-import { Box, Input, InputField,SearchIcon } from "@gluestack-ui/themed";
+import { Box, Input, InputField,SearchIcon ,Text} from "@gluestack-ui/themed";
 import {useTheme } from '@react-navigation/native';
 import { useFonts } from "expo-font";
 
