@@ -11,6 +11,7 @@ import SaveScreen from "../screens/SaveScreen";
 import EventDetailScreen from "../screens/EventDetailScreen";
 import JoinScreen from "../screens/JoinScreen";
 import { useFonts } from "expo-font";
+import NotifyScreen from "../screens/NotifyScreen";
 
 
 const Stack = createStackNavigator();
@@ -18,17 +19,20 @@ const Stack = createStackNavigator();
 export default SaveStack=()=>{
     const {colors}=useTheme();
     const {navigate}=useNavigation();
-
+    let notifyIcon="bell";
+/*
     const [hasMark,setHasMark]=useState(false);
     let markIcon= hasMark?"bookmark":"bookmark-outline";
     let markIconColor= hasMark?colors.focus:colors.primary500;
     const setmark = ()=>setHasMark(!hasMark);
+    
+    notify?dispatch(readMessage):null
 
     const hasRead=useSelector(selectMessage);
     const dispatch=useDispatch();
     const [notify,setNotify]=useState(hasRead);
     let notifyIcon=notify?"bell-badge":"bell";
-
+*/
     const [fontsLoaded]=useFonts({"jf":require("../../assets/fonts/jf-openhuninn-2.0.ttf")}); 
     if(!fontsLoaded){return <Text>Font is Loading...</Text>;}    
     
@@ -49,7 +53,7 @@ export default SaveStack=()=>{
                 headerRight:()=>(
                     <Pressable pr={12}>
                         <MaterialCommunityIcons name={notifyIcon} size={24} color={colors.primary800} 
-                        onPress={notify?dispatch(readMessage):null} /> 
+                         /> 
                     </Pressable>
                 )
             }}
@@ -69,6 +73,15 @@ export default SaveStack=()=>{
             }}
             />
             <Stack.Screen name="JoinDetail" component={JoinScreen} 
+             options={{
+                title:"",
+                headerLeft:()=>(
+                    <Pressable pl={12}>
+                        <AntDesign name="left" size={24} color={colors.primary800} onPress={()=>navigate("Save")} /> 
+                    </Pressable>),
+            }}
+            />
+            <Stack.Screen name="notify" component={NotifyScreen} 
              options={{
                 title:"",
                 headerLeft:()=>(

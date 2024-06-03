@@ -12,6 +12,7 @@ import LoginScreen from "../screens/LoginScreen";
 import HomeScreen from "../screens/HomeScreen";
 import GameScreen from "../screens/GameScreen";
 import { useFonts } from "expo-font";
+import DiaryScreen from "../screens/DiaryScreen";
 
 const Stack = createStackNavigator();
 
@@ -38,6 +39,15 @@ export default SettingStack=()=>{
             }}
             />
             <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="diary" component={DiaryScreen} 
+            options={{
+                title: "活動日誌",
+                headerLeft:()=>(
+                    <Pressable pl={12}>
+                        <AntDesign name="left" size={24} color={colors.primary800} onPress={()=>navigate("Setting")} /> 
+                    </Pressable>)
+
+            }}/>
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Game" component={GameScreen} 
             options={{

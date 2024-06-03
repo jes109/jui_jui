@@ -80,12 +80,12 @@ export default SettingDetail = () =>{
                         </Box>
                     </View>
                     <View style={styles.btndown}>
+                    <TouchableOpacity activeOpacity={0.5} onPress={()=>navigate("diary")}>
                         <Box style={styles.btnleft} bg={colors.primary200}>
-                            <Pressable>
                             <MaterialCommunityIcons name="square-edit-outline" size={40} color={colors.primary800}/>
-                            </Pressable>
-                            <Text style={styles.wordpost}>我的貼文</Text>
+                            <Text style={styles.wordpost}>活動日誌</Text>
                         </Box>
+                        </TouchableOpacity>
                         <Box style={styles.btnright} bg={colors.primary200}>
                             <Pressable>
                             <MaterialCommunityIcons name="help-circle-outline" size={40} color={colors.primary800}/>
