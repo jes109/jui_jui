@@ -25,7 +25,7 @@ export default JoinScreen = ({route}) => {
                         </VStack>
                         <Text mt={96} px={12} py={4} size="md" rounded="$2xl" bold="true" color={colors.primary500}  borderColor={colors.primary500} borderWidth={1} >目前參與人數:{num}</Text>
                     </HStack>
-                    <Text color="black" mt={20} size="md" bold="true" >{description}</Text>
+                    <Text color="black" mt={20} size="md" bold="true" >{`${description}`}</Text>
                 </Box>
             </ScrollView>
             <TouchableOpacity onPress={()=>{setNum(num-1);setHasJoin(true)}} activeOpacity={0.6} disabled={hasJoin}>

@@ -30,7 +30,7 @@ export default EventDetailScreen = ({route}) => {
                         </VStack>
                         <Text mt={12} alignSelf="flex-end" px={12} py={4} size="md" rounded="$2xl" bold="true" color={colors.primary500}  borderColor={colors.primary500} borderWidth={1} >目前參與人數:{num}</Text>
                     </VStack>
-                    <Text fontFamily="jf" lineHeight="$md" color="black" mt={20} size="md" >{description}</Text>
+                    <Text fontFamily="jf" lineHeight="$md" color="black" mt={20} size="md" >{`${description}`}</Text>
                     <TouchableOpacity onPress={()=>{setNum(num+1);setHasJoin(true)}} activeOpacity={0.6} disabled={hasJoin}>
                     <HStack rounded="$full" py={12} style={styles.fab} bg={colors.primaryContainer} flex={1} justifyContent="center" opacity={opacity}>
                     <Icon as={AddIcon} color={colors.primary800}/>

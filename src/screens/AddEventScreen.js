@@ -12,6 +12,7 @@ export default AddEventScreen = () =>{
     const {colors} =useTheme();
     const {goBack}=useNavigation();
     const ref = React.useRef(null)
+    const [img,setImg]=useState(0);
 
     const [showModal, setShowModal] = useState(false)
     console.log(showModal)
@@ -23,10 +24,22 @@ export default AddEventScreen = () =>{
             <Box bg={colors.lightsurface} w={350} rounded="$2xl" my={20} alignItems="center">
                 <TextInput style={[styles.maininput,{backgroundColor:colors.midsurface},{color:colors.primary800}]} placeholder="活動名稱"/>
                 <TouchableOpacity onPress={() => setShowModal(true)}>
-                    <Box mt={20} w={300} h={200} borderColor="gray" borderWidth={2} rounded="$2xl" alignItems="center" justifyContent="center">
-                        <MaterialCommunityIcons name="upload" size={48} color="gray"/>
-                        <Text color="gray">update image</Text>
-                    </Box>
+                <Box overflow="hidden" mt={20} w={300} h={200} borderColor="gray" borderWidth={2} rounded="$2xl" alignItems="center" justifyContent="center">
+                    {
+                        img == 0 ? (
+                            <>
+                                <MaterialCommunityIcons name="upload" size={48} color="gray" />
+                                <Text color="gray">update image</Text>
+                            </>
+                        ) : (
+                            img == 1 ? (
+                                <Image source={require("../img/choose1.jpg")} alt="img" style={{ width: "100%", height: 196 }} />
+                            ) : (
+                                <Image source={require("../img/choose2.jpg")} alt="img" style={{ width: "100%", height: 196 }} />
+                            )
+                        )
+                    }
+                </Box>
                 </TouchableOpacity>
                 <Box px={12} pb={20} bg={colors.midsurface} w={300} h="auto" rounded="$3xl" mt={20} mb={80}>
                     <HStack alignItems="center">
@@ -70,9 +83,12 @@ export default AddEventScreen = () =>{
           </ModalHeader>
           <ModalBody>
             <Box bg={colors.primary500} w={280} h={280} alignSelf="center">
-            <Image source={require("../img/diary2.jpg")} alt="img" w="$full" h={240}/>
-            <Image source={require("../img/diary2.jpg")} alt="img" w="$full" h={240}/>
-            <Image source={require("../img/diary2.jpg")} alt="img" w="$full" h={240}/>
+                <TouchableOpacity activeOpacity={0.5} onPress={()=>{setImg(1);setShowModal(false)}}>
+                    <Image source={require("../img/choose1.jpg")} alt="img" w="$full" h={140}/>
+                </TouchableOpacity>
+                <TouchableOpacity activeOpacity={0.5} onPress={()=>{setImg(2);setShowModal(false)}}>
+                <Image source={require("../img/choose2.jpg")} alt="img" w="$full" h={140}/>
+                </TouchableOpacity>
             </Box>
           </ModalBody>
           <ModalFooter />
