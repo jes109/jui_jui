@@ -195,7 +195,7 @@ const styles=StyleSheet.create(
             alignSelf:"center"
         },
         logout: {
-            marginTop: 50,
+            marginTop: 60,
             justifyContent: "center",
             //backgroundColor: "orange",
             borderRadius: 20,

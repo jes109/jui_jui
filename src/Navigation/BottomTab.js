@@ -13,6 +13,7 @@ import ChatStack from "./ChatStack";
 import SettingStack from "./SettingStack";
 import SaveStack from "./SaveStack";
 import ChatScreen from "../screens/ChatScreen"
+import ChatMapScreen from "../screens/ChatMapScreen";
 
 const Tab = createBottomTabNavigator();
 

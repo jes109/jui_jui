@@ -17,13 +17,8 @@ const ChatRoomList = () =>{
     return(
 
     <View>
-        <FlatList
-            data={ChatRoom}
-            renderItem={renderItem}
-            keyExtractor={(item,index)=>index+item}
-            scrollEnabled={false}
-        />
-        <Center>
+
+    <Center>
         <Box style={styles.circle}>
             <View style={styles.icon}>
                 <TouchableOpacity 
@@ -36,27 +31,52 @@ const ChatRoomList = () =>{
                 </TouchableOpacity>
             </View>
         </Box>
-        </Center>
+    </Center>
         <Center>
             <Text style={styles.checkmap}>(查看集合點地圖)</Text>
         </Center>
-        <Box>
-            <Input variant="rounded" size="lg" mb={16} w={360} mt={16} >
-                <InputSlot pl={16}>
-                    <InputIcon as={SearchIcon} />
-                </InputSlot>
-                <InputField placeholder="search"/>
-            </Input>
-        </Box>
+
+        <FlatList
+            data={ChatRoom}
+            renderItem={renderItem}
+            keyExtractor={(item,index)=>index+item}
+            scrollEnabled={false}
+        />
+        
+        <View style={styles.type}>
+            <Box>
+                <Input variant="rounded" size="lg" mb={16} w={360} mt={16} >
+                    <View style={styles.message}>
+                        <InputField placeholder="輸入訊息"/>
+                    </View>
+                    <View style={styles.keyboard}>
+                        <MaterialCommunityIcons name="keyboard-outline" size={30}/>
+                    </View>
+                </Input>
+            </Box>
+        </View>
     </View>
     )
 }
 
 const styles=StyleSheet.create(
     {
+        type: {
+            marginTop: 60
+        },
+        message: {
+            paddingLeft: 8
+        },
+        keyboard: {
+            alignItems: "center",
+            textAlign: "center",
+            paddingLeft: 180,
+            paddingTop: 5
+        },
         checkmap: {
             color: "green",
-            marginTop: 20
+            marginTop: 20,
+            marginBottom: 20
         },
        icon: {
         paddingTop: 10
@@ -66,7 +86,8 @@ const styles=StyleSheet.create(
         height: 100,
         width: 120,
         backgroundColor: "lightgreen",
-        borderRadius: 60
+        borderRadius: 60,
+        marginBottom: 10
        }
     }
 );
