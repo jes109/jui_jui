@@ -1,36 +1,31 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
-import { Box,HStack,Image,Pressable,Text, VStack} from "@gluestack-ui/themed";
-import { useNavigation,useTheme } from '@react-navigation/native';
-import { TouchableOpacity } from "react-native";
+import { Box, HStack, Image, Text, VStack } from "@gluestack-ui/themed";
+import { useTheme } from '@react-navigation/native';
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
 
 import { useDispatch, useSelector } from "react-redux";
-import {changeMark,selectActivity} from "../redux/avtivitySlice"
+import { changeMark, selectActivity } from "../redux/avtivitySlice"
 
-export default EvenItem =({event})=>{
-    const [hasMark,setHasMark]=useState(event.mark);
-
-    const activity = useSelector((state) => selectActivity(state, event.id));
-    useEffect(() => {
-        setHasMark(activity?.mark);
-    }, [activity?.mark]);
-
-    const {navigate} = useNavigation();
+export default EvenItem = ({ event }) => {
+    const [hasMark, setHasMark] = useState(event.mark);
     const { colors } = useTheme();
+    const dispatch = useDispatch();
 
-    const dispatch=useDispatch();
+    // 监听 mark 的变化，当 mark 发生变化时重新获取数据
+    useEffect(() => {
+        setHasMark(event.mark);
+    }, [event.mark]);
 
-    let markIcon= hasMark?"bookmark":"bookmark-outline";
-    let markIconColor= hasMark?colors.focus:colors.primary500;
-    const setmark = ()=>setHasMark(!hasMark);
+    // 切换 mark 状态
+    const setmark = () => {
+        setHasMark(!hasMark);
+        dispatch(changeMark(event.id));
+    };
 
-    return(
+    return (
         <Box w={350} rounded="$xl" overflow="hidden" mb={20} alignSelf="center">
-            <TouchableOpacity activeOpacity={0.5} onPress={()=>navigate("detail",event)}>
-                <Image source={{uri:`${event.img}`}} alt="bird" w="$full" h={132}/>
-            </TouchableOpacity>
+            <Image source={{ uri: `${event.img}` }} alt="bird" w="$full" h={132} />
             <Box bg={colors.card} pt={12} pb={12} px={8} >
                 <HStack justifyContent="space-between">
                     <VStack>
@@ -38,17 +33,17 @@ export default EvenItem =({event})=>{
                         <Text fontSize={16} bold="true" mt={8} color={colors.primary500}>{event.location}</Text>
                     </VStack>
                     <Box justifyContent="flex-end">
-                    <MaterialCommunityIcons style={styles.btn} name={markIcon} size={28} color={markIconColor} onPress={()=>{setmark();dispatch(changeMark(event.id))}} />
+                        {/* 使用 hasMark 控制图标和颜色 */}
+                        <MaterialCommunityIcons style={styles.btn} name={hasMark ? "bookmark" : "bookmark-outline"} size={28} color={hasMark ? colors.focus : colors.primary500} onPress={setmark} />
                     </Box>
                 </HStack>
-
             </Box>
-            </Box>
+        </Box>
     );
 }
 
-const styles=StyleSheet.create({
-    btn:{
-        justifyContent:"flex-end"
+const styles = StyleSheet.create({
+    btn: {
+        justifyContent: "flex-end"
     }
 })
