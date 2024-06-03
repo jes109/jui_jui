@@ -1,7 +1,7 @@
 import React from "react";
 import { useState,useRef } from "react";
 import { StyleSheet, TextInput, TouchableOpacity } from "react-native";
-import {Heading,CloseIcon,ModalFooter,Button,ButtonText,ModalCloseButton, ModalContent,ModalHeader,Modal,ModalBackdrop,ModalBody,Box, FormControl, FormControlLabel, FormControlLabelText, Input, InputField, Text, HStack,Pressable,Icon,AddIcon, ScrollView} from "@gluestack-ui/themed";
+import {Image,Heading,CloseIcon,ModalFooter,Button,ButtonText,ModalCloseButton, ModalContent,ModalHeader,Modal,ModalBackdrop,ModalBody,Box, FormControl, FormControlLabel, FormControlLabelText, Input, InputField, Text, HStack,Pressable,Icon,AddIcon, ScrollView} from "@gluestack-ui/themed";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
 import UnAddActionSheet from "../components/UnAddActionSheet";
