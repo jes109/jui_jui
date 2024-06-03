@@ -14,7 +14,7 @@ import { useSignout } from "../tanstack-query";
 export default SettingDetail = () =>{
     const { mutate } = useSignout(); 
 
-    const navigation = useNavigation();
+    const { navigate } = useNavigation();
     const [showActionsheet, setShowActionsheet] = React.useState(false);
 
     const handleClose = () => setShowActionsheet(!showActionsheet);
@@ -97,10 +97,13 @@ export default SettingDetail = () =>{
 
                 <Center>
                     <View>
-                        <TouchableOpacity>
-                            <Box style={styles.sunbtn} bg={colors.primary800}>
+                        <TouchableOpacity
+                            activeOpacity={0.6}
+                            onPress={() => navigate('Game')}
+                        >
+                            <Box style={styles.gamebtn} bg={colors.primary800}>
                                 <Center>
-                                    <MaterialCommunityIcons name="sun-wireless" size={80} color={colors.primary200}/>
+                                    <MaterialCommunityIcons name="gamepad-variant-outline" size={70} color={colors.primary200}/>
                                 </Center>
                             </Box>
                         </TouchableOpacity>
@@ -150,13 +153,13 @@ export default SettingDetail = () =>{
 
 const styles=StyleSheet.create(
     {
-        sunbtn: {
-            marginTop: 30,
+        gamebtn: {
+            marginTop: 40,
             justifyContent: "center",
             //backgroundColor: "orange",
             borderRadius: 100,
-            height: 160,
-            width: 160,
+            height: 150,
+            width: 150,
             paddingVertical: 15
         },
         sun: {
@@ -164,7 +167,7 @@ const styles=StyleSheet.create(
             marginTop: 40
         },
         switch: {
-            marginTop: 20,
+            marginTop: 30,
             color: "green"
         },
         item: {

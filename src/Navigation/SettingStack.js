@@ -2,15 +2,22 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Text } from "@gluestack-ui/themed";
+import { useTheme } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import { Pressable } from "@gluestack-ui/themed";
 
 import SettingScreen from "../screens/SettingScreen";
 import LoginScreen from "../screens/LoginScreen";
 import HomeScreen from "../screens/HomeScreen";
+import GameScreen from "../screens/GameScreen";
 import { useFonts } from "expo-font";
 
 const Stack = createStackNavigator();
 
 export default SettingStack=()=>{
+    const {colors}=useTheme();
+    const {navigate}=useNavigation();
     const [fontsLoaded]=useFonts({"jf":require("../../assets/fonts/jf-openhuninn-2.0.ttf")}); 
     if(!fontsLoaded){return <Text>Font is Loading...</Text>;}    
     
@@ -32,6 +39,16 @@ export default SettingStack=()=>{
             />
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Game" component={GameScreen} 
+            options={{
+                title: "小遊戲",
+                headerLeft:()=>(
+                    <Pressable pl={12}>
+                        <AntDesign name="left" size={24} color={colors.primary800} onPress={()=>navigate("Setting")} /> 
+                    </Pressable>)
+
+            }}
+            />
         </Stack.Navigator>
     )
 }
