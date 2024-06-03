@@ -41,7 +41,7 @@ export default SettingStack=()=>{
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Game" component={GameScreen} 
             options={{
-                title: "小遊戲",
+                title: "動畫",
                 headerLeft:()=>(
                     <Pressable pl={12}>
                         <AntDesign name="left" size={24} color={colors.primary800} onPress={()=>navigate("Setting")} /> 
