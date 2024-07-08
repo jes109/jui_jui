@@ -10,18 +10,19 @@ import { getActs } from "../api/firebase";
 export default Home = () => {
     const {colors} =useTheme();
     const {navigate}=useNavigation();
+
     return(
         <Box flex={1} bg={colors.surface}>
-            <Center>
+            <Center flex={1}>
                 <EventList/>
-                <Box style={styles.fabBack} bg={colors.surface}>
+            </Center>
+            <Box style={styles.fabBack} bg={colors.surface}>
                 <TouchableOpacity onPress={()=>navigate("add")}>
                     <Box bg={colors.primaryContainer} p={16} rounded="$full" >
                         <MaterialCommunityIcons name="square-edit-outline" size={28} color={colors.primary800}/>
                     </Box>
                 </TouchableOpacity>
                 </Box>
-            </Center>
         </Box>
     )
 }

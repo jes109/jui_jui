@@ -68,6 +68,7 @@ const Mark=()=>{
         </ScrollView>
     )
 }
+
 const Join=()=>{
     const dispatch = useDispatch();
     const activities = useSelector(selectActivity);

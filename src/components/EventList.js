@@ -14,7 +14,7 @@ export default EventList = () =>{
     const { colors } = useTheme();
     const [data, setData] = useState([]);
     const dispatch = useDispatch();
-
+    
     const activities = useSelector(selectActivity);
 
     useEffect(() => {
@@ -25,6 +25,16 @@ export default EventList = () =>{
     if (activities.length === 0) {
         return <Text>Loading...</Text>;
     }
+
+    const [search, setSearch] = useState('');
+    const [filteredData, setFilteredData] = useState(activities);
+
+    useEffect(() => {
+        const filtered = activities.filter(item => 
+            item.title.toLowerCase().includes(search.toLowerCase())
+        );
+        setFilteredData(filtered);
+    }, [search]);
     /*
     useEffect(() => {
         const fetchData = async () => {
@@ -39,6 +49,7 @@ export default EventList = () =>{
       }, [data]);
     */
     const renderItem=({item})=><EventItem event={item}/>;
+    
     return(
         <FlatList
         ListHeaderComponent={(
@@ -47,12 +58,16 @@ export default EventList = () =>{
                     <InputSlot pl={16}>
                         <InputIcon as={SearchIcon} />
                     </InputSlot>
-                    <InputField fontFamily="jf" placeholder="search"/>
+                    <InputField 
+                    fontFamily="jf" 
+                    placeholder="search"
+                    value={search}
+                    onChangeText={text => setSearch(text)}/>
                 </Input>
             </Box>
         )}
         stickyHeaderIndices={[0]}
-        data={activities}
+        data={filteredData}
         renderItem={renderItem}
         keyExtractor={(item,index)=>index+item}
         showsVerticalScrollIndicator={false}
