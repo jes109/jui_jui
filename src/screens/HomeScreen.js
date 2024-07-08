@@ -13,7 +13,7 @@ export default Home = () => {
 
     return(
         <Box flex={1} bg={colors.surface}>
-            <Center flex={1}>
+            <Center flex={1} pb={48}>
                 <EventList/>
             </Center>
             <Box style={styles.fabBack} bg={colors.surface}>

@@ -81,6 +81,7 @@ import {useSignup} from "../tanstack-query"
                             type="email"
                             value={email}
                             onChangeText={(email)=>{setEmail(email)
+                            keyboardType="email-address"
                             }}/>
                         </Input>
                     </FormControl>

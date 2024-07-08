@@ -25,7 +25,6 @@ export default EventList = () =>{
     if (activities.length === 0) {
         return <Text>Loading...</Text>;
     }
-
     const [search, setSearch] = useState('');
     const [filteredData, setFilteredData] = useState(activities);
 
