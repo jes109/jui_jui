@@ -22,7 +22,7 @@ const firebaseConfig = {
     persistence:getReactNativePersistence(ReactNativeAsyncStorage)
   })
 
-  const db=app_length? 
+  export const db=app_length? 
   getFirestore(app):
   initializeFirestore(app,{experimentalForceLongPolling:true});
 
@@ -57,3 +57,4 @@ const firebaseConfig = {
     const actsData=DocsSnap.docs.map(doc => ({id: doc.id, ...doc.data()}));
     return actsData;
   }
+  
